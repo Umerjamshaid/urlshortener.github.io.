@@ -170,4 +170,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 ### Additional Badges
-- [![Build Status](https://travis-ci.com/your-username/url-shortener.svg?branch=main)](https://travis-ci.com/your-username/url-shortener)
+[![Build Status](https://travis-ci.com/your-username/url-shortener.svg?branch=main)](https://travis-ci.com/your-username/url-shortener)
+- [![codecov](https://codecov.io/gh/Umerjamshaid/url-shortener/branch/main/graph/badge.svg)](https://codecov.io/gh/Umerjamshaid/url-shortener)
+
