@@ -36,7 +36,7 @@ Welcome to the **URL Shortener** project built with **Django**! This project all
 
 ### About Us Page
 
-![Shorten URL Page](https://github.com/Umerjamshaid/urlshortener/blob/main/Screenshots/shorten-url.png)
+![About Us Page Page](https://github.com/Umerjamshaid/urlshortener/blob/main/Screenshots/about.png)
 
 ### YouTube Downloader
 
