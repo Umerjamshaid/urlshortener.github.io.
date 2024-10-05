@@ -169,13 +169,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **UI Enhancements**: Further improve the UI to enhance the user experience.
 
 ---
-
-Feel free to add your custom screenshots and replace placeholders with your own content.
-
 ### Additional Badges
-
-You can add more badges like:
-- **Build status**: [![Build Status](https://img.shields.io/travis/your-repo/url-shortener.svg)](https://travis-ci.org/your-repo/url-shortener)
-- **Code Quality**: [![codecov](https://codecov.io/gh/your-repo/url-shortener/branch/main/graph/badge.svg)](https://codecov.io/gh/your-repo/url-shortener)
-
-Let me know if you'd like more customization or additional sections!
+- [![Build Status](https://travis-ci.com/your-username/url-shortener.svg?branch=main)](https://travis-ci.com/your-username/url-shortener)
