@@ -2,7 +2,7 @@
 
 # 🚀 URL Shortener with Django
 
-![banner](screenshots/catalog.jpg)
+![banner](https://github.com/Umerjamshaid/urlshortener/blob/main/Screenshots/catalog.jpg)
 
 [![Django Version](https://img.shields.io/badge/Django-4.1.13-brightgreen.svg)](https://www.djangoproject.com/)
 [![Python Version](https://img.shields.io/badge/Python-3.12-blue.svg)](https://www.python.org/)
