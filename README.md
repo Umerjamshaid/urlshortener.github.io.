@@ -1,5 +1,3 @@
----
-
 # 🚀 URL Shortener with Django
 
 ![banner](screenshots/catalog.jpg)
@@ -195,5 +193,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Here are some additional badges you can use if you configure CI/CD services like Travis CI and Codecov:
 
-- [![Build Status](https://travis-ci.com/Umerjamshaid/url-shortener.svg?branch=main)](https://travis-ci.com/Umerjamshaid/url-shortener)
+- [![Build Status](https://travis-ci.com/your-username/url-shortener.svg?branch=main)](https://travis-ci.com/your-username/url-shortener)
 - [![codecov](https://codecov.io/gh/Umerjamshaid/url-short
