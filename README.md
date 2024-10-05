@@ -32,15 +32,14 @@ Welcome to the **URL Shortener** project built with **Django**! This project all
 
 ### Home Page
 
-![Home Page](screenshots/home.png)
+![Home Page](https://github.com/Umerjamshaid/urlshortener/blob/main/Screenshots/home.png)
+### About Us Page
 
-### Shorten URL Page
-
-![Shorten URL Page](screenshots/about.png)
+![Shorten URL Page](https://github.com/Umerjamshaid/urlshortener/blob/main/Screenshots/shorten-url.png)
 
 ### YouTube Downloader
 
-![YouTube Downloader](screenshots/youtube.png)
+![YouTube Downloader](https://github.com/Umerjamshaid/urlshortener/blob/main/Screenshots/youtube.png)
 
 ---
 
