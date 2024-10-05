@@ -94,14 +94,14 @@ Now, open your browser and visit **`http://127.0.0.1:8000`**. Your URL Shortener
 
 - This is the landing page where you can shorten URLs. Just enter a long URL, and a shortened link will be generated.
 
-![Shorten URL Page](screenshots/home.png)
+![Home Page](https://github.com/Umerjamshaid/urlshortener/blob/main/Screenshots/home.png)
 
-### 2. **Shortened URL**
+### 2. **Shorten URL Page**
 
 - Once you enter a URL, the application will generate a short link. Example: **`http://127.0.0.1:8000/abc123/`**
 - Share the short link, and anyone visiting it will be redirected to the original URL.
 
-![Shortened URL](screenshots/result.png)
+![Shorten URL Page](https://github.com/Umerjamshaid/urlshortener/blob/main/Screenshots/result.png)
 
 ### 3. **YouTube Video Downloader**
 
