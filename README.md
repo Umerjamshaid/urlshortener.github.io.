@@ -4,6 +4,8 @@
 [![Python Version](https://img.shields.io/badge/Python-3.12-blue.svg)](https://www.python.org/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/your-repo/url-shortener/pulls)
+[![Build Status](https://travis-ci.com/your-username/url-shortener.svg?branch=main)](https://travis-ci.com/your-username/url-shortener)
+[![codecov](https://codecov.io/gh/Umerjamshaid/url-shortener/branch/main/graph/badge.svg)](https://codecov.io/gh/Umerjamshaid/url-shortener)
 
 ## 🎯 Project Overview
 
@@ -157,8 +159,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🙌 Acknowledgments
 
 - Thanks to the Django community for the fantastic documentation and tutorials.
-- Shout-out to _us_ **Umer Jamshaid** and **Yahya Rizwan** for building this awesome project!
-- Special Thanks to our Teach sir @Muzamil bilwani for giudince and support🫡
+- Shout-out to **Umer Jamshaid** and **Yahya Rizwan** for building this awesome project!
+- Special Thanks to **Sir Muzamil Bilwani** for his guidance and support 🫡
+
 ---
 
 ## 🏗️ Future Improvements
@@ -169,7 +172,20 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **UI Enhancements**: Further improve the UI to enhance the user experience.
 
 ---
-### Additional Badges
-[![Build Status](https://travis-ci.com/your-username/url-shortener.svg?branch=main)](https://travis-ci.com/your-username/url-shortener)
-[![codecov](https://codecov.io/gh/Umerjamshaid/url-shortener/branch/main/graph/badge.svg)](https://codecov.io/gh/Umerjamshaid/url-shortener)
 
+### Additional Badges
+
+Here are some additional badges you can use if you configure CI/CD services like Travis CI and Codecov:
+
+- [![Build Status](https://travis-ci.com/your-username/url-shortener.svg?branch=main)](https://travis-ci.com/your-username/url-shortener)
+- [![codecov](https://codecov.io/gh/Umerjamshaid/url-shortener/branch/main/graph/badge.svg)](https://codecov.io/gh/Umerjamshaid/url-shortener)
+
+---
+
+### How to Customize Badges
+
+- If you have **Travis CI** or **Codecov** configured, ensure that they are connected to your repository to generate build or coverage reports.
+- For **GitHub Actions** CI, you can use the following badge:
+  ```markdown
+  [![Django CI](https://github.com/your-username/url-shortener/actions/workflows/main.yml/badge.svg)](https://github.com/your-username/url-shortener/actions/workflows/main.yml)
+  ```
