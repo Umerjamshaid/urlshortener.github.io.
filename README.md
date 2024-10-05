@@ -1,4 +1,8 @@
+---
+
 # 🚀 URL Shortener with Django
+
+![banner](screenshots/catalog.jpg)
 
 [![Django Version](https://img.shields.io/badge/Django-4.1.13-brightgreen.svg)](https://www.djangoproject.com/)
 [![Python Version](https://img.shields.io/badge/Python-3.12-blue.svg)](https://www.python.org/)
@@ -10,11 +14,13 @@
 ## 🎯 Project Overview
 
 Welcome to the **URL Shortener** project built with **Django**! This project allows users to shorten long URLs into compact, easy-to-share links, similar to popular services like **bit.ly**. The project includes:
+
 - URL shortening functionality with a randomly generated short code.
 - Redirection to the original URL when a short link is visited.
 - YouTube video downloader for added fun!
 
 ### 🌟 Key Features
+
 - **Shorten Long URLs**: Generate short, easy-to-share URLs with a custom short code.
 - **Custom Redirects**: Visit the shortened URL to get redirected to the original.
 - **YouTube Downloader**: Download YouTube videos in various resolutions (optional feature).
@@ -24,9 +30,17 @@ Welcome to the **URL Shortener** project built with **Django**! This project all
 
 ## 📸 Screenshots
 
-<!-- Add screenshots of your app here, replace the paths with your actual screenshot paths -->
-<img src="screenshots/home.png" alt="Home Page" width="600"/>
-<img src="screenshots/shorten-url.png" alt="Shorten URL Page" width="600"/>
+### Home Page
+
+![Home Page](screenshots/home.png)
+
+### Shorten URL Page
+
+![Shorten URL Page](screenshots/about.png)
+
+### YouTube Downloader
+
+![YouTube Downloader](screenshots/youtube.png)
 
 ---
 
@@ -77,20 +91,23 @@ Now, open your browser and visit **`http://127.0.0.1:8000`**. Your URL Shortener
 ## 🔥 Usage
 
 ### 1. **Home Page**
+
 - This is the landing page where you can shorten URLs. Just enter a long URL, and a shortened link will be generated.
 
-<img src="screenshots/shorten.png" alt="URL Shortening" width="600"/>
+![Shorten URL Page](screenshots/home.png)
 
 ### 2. **Shortened URL**
+
 - Once you enter a URL, the application will generate a short link. Example: **`http://127.0.0.1:8000/abc123/`**
 - Share the short link, and anyone visiting it will be redirected to the original URL.
 
-<img src="screenshots/result.png" alt="Shortened URL" width="600"/>
+![Shortened URL](screenshots/result.png)
 
 ### 3. **YouTube Video Downloader**
+
 - Go to the YouTube section, enter the video link, select the desired resolution, and download your video locally!
 
-<img src="screenshots/youtube.png" alt="YouTube Downloader" width="600"/>
+![YouTube Downloader](screenshots/youtube.png)
 
 ---
 
@@ -102,16 +119,17 @@ Our project also provides an API for programmatically shortening URLs. You can i
 
 - **Method**: POST
 - **Request Body**:
+
   ```json
   {
-      "original_url": "https://example.com"
+    "original_url": "https://example.com"
   }
   ```
 
 - **Response**:
   ```json
   {
-      "short_url": "http://127.0.0.1:8000/abc123/"
+    "short_url": "http://127.0.0.1:8000/abc123/"
   }
   ```
 
@@ -177,15 +195,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Here are some additional badges you can use if you configure CI/CD services like Travis CI and Codecov:
 
-- [![Build Status](https://travis-ci.com/your-username/url-shortener.svg?branch=main)](https://travis-ci.com/your-username/url-shortener)
-- [![codecov](https://codecov.io/gh/Umerjamshaid/url-shortener/branch/main/graph/badge.svg)](https://codecov.io/gh/Umerjamshaid/url-shortener)
-
----
-
-### How to Customize Badges
-
-- If you have **Travis CI** or **Codecov** configured, ensure that they are connected to your repository to generate build or coverage reports.
-- For **GitHub Actions** CI, you can use the following badge:
-  ```markdown
-  [![Django CI](https://github.com/your-username/url-shortener/actions/workflows/main.yml/badge.svg)](https://github.com/your-username/url-shortener/actions/workflows/main.yml)
-  ```
+- [![Build Status](https://travis-ci.com/Umerjamshaid/url-shortener.svg?branch=main)](https://travis-ci.com/Umerjamshaid/url-shortener)
+- [![codecov](https://codecov.io/gh/Umerjamshaid/url-short
