@@ -4,17 +4,67 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Page Not Found</title>
+    <title>404 - Page Not Found</title>
     <link
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background: linear-gradient(120deg, #f8f9fa, #e0e0e0);
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+      }
+
+      h1 {
+        font-size: 4rem;
+        font-weight: bold;
+        color: #343a40;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      p {
+        font-size: 1.2rem;
+        color: #6c757d;
+      }
+
+      .btn-primary {
+        background: linear-gradient(45deg, #007bff, #0056b3);
+        border: none;
+        padding: 10px 20px;
+        font-size: 1.2rem;
+        transition: background 0.3s ease-in-out;
+      }
+
+      .btn-primary:hover {
+        background: linear-gradient(45deg, #0056b3, #003f8b);
+      }
+
+      .container {
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        background: white;
+        border-radius: 10px;
+        margin: 20px;
+      }
+    </style>
   </head>
   <body>
     <div class="container mt-5 text-center">
-      <h1>404 - Page Not Found</h1>
-      <p>The shortened URL you are trying to access does not exist.</p>
-      <a href="/" class="btn btn-primary">Go Home</a>
+      <h1>404</h1>
+      <p>Oops! The shortened URL you are trying to access does not exist.</p>
+      <a href="/" class="btn btn-primary">
+        <i class="fas fa-home"></i> Go Home
+      </a>
     </div>
   </body>
 </html>

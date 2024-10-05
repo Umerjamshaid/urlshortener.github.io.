@@ -15,6 +15,27 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
       rel="stylesheet"
     />
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    />
+    <!-- RemixIcon CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css"
+      rel="stylesheet"
+    />
 
     <!-- Custom Stylesheet (Uncomment if you have custom styles) -->
     <!-- <link rel="stylesheet" href="{% static 'css/styles.css' %}" /> -->
@@ -101,6 +122,45 @@
         font-size: 0.9rem;
         color: #6c757d;
       }
+
+      /* Footer */
+      footer {
+        margin-top: auto; /* Keeps footer at the bottom */
+        background: linear-gradient(145deg, #243b55, #141e30);
+        box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.3);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        color: white;
+        padding: 30px 0;
+        text-align: center;
+      }
+
+      footer p {
+        margin-top: 20px;
+        font-size: 1rem;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+      }
+
+      /* Add glow and hover effect to footer text */
+      footer p:hover {
+        color: #00bcd4;
+        text-shadow: 0 0 10px rgba(0, 188, 212, 0.7);
+      }
+
+      /* Social icons size */
+      /* Remove underline from social media icons */
+      .social-icons a {
+        text-decoration: none; /* Remove the underline */
+      }
+
+      .social-icons i {
+        font-size: 1.5rem;
+        margin: 0 10px;
+        transition: transform 0.2s ease;
+      }
+
+      .social-icons i:hover {
+        transform: scale(1.2); /* Add hover effect */
+      }
     </style>
   </head>
 
@@ -108,11 +168,10 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <!-- Add logo inside the navbar-brand -->
         <a class="navbar-brand" href="{% url 'index' %}">
           <img
-            src="{% static 'img/wallpaperflare.com_wallpaper.jpg' %}"
-            alt="Logo"
+            src="{% static 'img/www.png' %}"
+            alt="logo"
             style="width: 40px; height: 40px"
           />
           URL Shortener
@@ -134,7 +193,7 @@
               <a class="nav-link" href="{% url 'index' %}">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Features</a>
+              <a class="nav-link" href="{% url 'base' %}">Features</a>
               <!-- You can update this link -->
             </li>
             <li class="nav-item">
@@ -157,36 +216,20 @@
       </div>
     </section>
 
-    <!-- Our Story Section -->
-    <section class="py-5">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-md-8">
-            <div class="text-center">
-              <span class="text-muted">Our Story</span>
-              <h2 class="display-5 fw-bold">Who We Are</h2>
-              <p class="lead">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
-                nec odio. Praesent libero. Sed cursus ante dapibus diam. Lorem
-                ipsum dolor sit amet, consectetur adipiscing elit.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- Our Mission Section -->
     <section class="our-mission text-center">
       <div class="container">
         <h2 class="display-5 fw-bold">Our Mission</h2>
         <p class="lead">
-          We strive to make the world a better place by doing what we do best.
+          Our mission is to create a cutting-edge URL shortening service that
+          competes with industry leaders like bit.ly.
         </p>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
-          dapibus, nisi ac commodo convallis, mauris eros blandit leo, at
-          lobortis magna nulla sit amet mi. Vivamus ac vehicula ligula.
+          We aim to provide an efficient, user-friendly platform where users can
+          quickly shorten URLs, track their usage, and even download YouTube
+          videos. Our goal is to offer a powerful tool that makes link sharing
+          simple and reliable, with added features that set us apart from the
+          competition.
         </p>
       </div>
     </section>
@@ -216,6 +259,16 @@
               <p>Backend Developer</p>
             </div>
           </div>
+          <div class="col-md-4">
+            <div class="team-member">
+              <img
+                src="https://ca.slack-edge.com/T077L9M2UQZ-U077A426VN0-2e492c422155-512"
+                alt=" Muzammil Bilwani - Our Supervisor"
+              />
+              <h5>Muzammil Bilwani</h5>
+              <p>Our Supervisor</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -226,19 +279,30 @@
         <!-- Social Media Icons -->
         <div class="social-icons mb-3">
           <a href="#" class="text-white mx-2">
-            <i class="fab fa-twitter" style="color: #1da1f2"></i>
+            <i class="ri-twitter-fill" style="color: #1da1f2"></i>
           </a>
+
           <a href="#" class="text-white mx-2">
-            <i class="fab fa-facebook" style="color: #1877f2"></i>
+            <i class="ri-facebook-fill" style="color: #1877f2"></i>
           </a>
-          <a href="#" class="text-white mx-2">
-            <i class="fab fa-medium" style="color: #000000"></i>
+
+          <a
+            href="https://medium.com/minamali"
+            target="_blank"
+            class="text-white mx-2"
+          >
+            <i class="ri-medium-fill" style="color: #000000"></i>
           </a>
-          <a href="#" class="text-white mx-2">
-            <i class="fab fa-linkedin" style="color: #0a66c2"></i>
+
+          <a
+            href="https://www.linkedin.com/in/umer-jamshaid/"
+            class="text-white mx-2"
+          >
+            <i class="ri-linkedin-fill" style="color: #0a66c2"></i>
           </a>
+
           <a href="#" class="text-white mx-2">
-            <i class="fab fa-youtube" style="color: #ff0000"></i>
+            <i class="ri-youtube-fill" style="color: #ff0000"></i>
           </a>
         </div>
         <p class="mb-0">
@@ -248,7 +312,8 @@
       </div>
     </footer>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery, Bootstrap JS, and AJAX Script -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

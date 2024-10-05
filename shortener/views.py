@@ -17,11 +17,11 @@ from django.shortcuts import render
 from pytube import YouTube
 
 
-# Generate a random shortcode
+# ==========================================Generate short code==============================
 def generate_short_code():
     return ''.join(random.choices(string.ascii_letters + string.digits, k=6))
 
-# API View for shortening URLs
+#========================================= API View for shortening URLs==============================
 class ShortenURLView(APIView):
     def post(self, request):
         serializer = URLSerializer(data=request.data)
@@ -31,7 +31,7 @@ class ShortenURLView(APIView):
             return Response({"short_url": request.build_absolute_uri(f'/{url.short_code}/')}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-# Redirect the shortened URL
+# Redirect 
 def redirect_url(request, short_code):
     try:
         url = URL.objects.get(short_code=short_code)
@@ -39,7 +39,6 @@ def redirect_url(request, short_code):
     except URL.DoesNotExist:
         return render(request, '404.html', status=404)
 
-# Home page for url form on the web
 def index(request):
     if request.method == 'POST':
         original_url = request.POST.get('url')
@@ -48,9 +47,11 @@ def index(request):
         return render(request, 'index.html', {'short_url': request.build_absolute_uri(f'/{url.short_code}/')})
     return render(request, 'index.html')
 
-# About page
+
 def about(request):
     return render(request, 'about.html')
+def base(request):
+    return render(request, 'base.html')
 
 # ============================youtube video downloader====================================== 
 def youtube(request):

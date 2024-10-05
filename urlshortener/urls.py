@@ -21,9 +21,9 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('about/', about, name='about'),
     path('', include('shortener.urls')),  # Include the URLs from the shortener app
     path('<str:short_url>/', redirect_url, name='redirect'),  # Add this line
-    path('about/', about, name='about'),
     
 ]
 
