@@ -107,7 +107,7 @@ Now, open your browser and visit **`http://127.0.0.1:8000`**. Your URL Shortener
 
 - Go to the YouTube section, enter the video link, select the desired resolution, and download your video locally!
 
-![YouTube Downloader](screenshots/youtube.png)
+![YouTube Downloader](https://github.com/Umerjamshaid/urlshortener/blob/main/Screenshots/youtube.png)
 
 ---
 
