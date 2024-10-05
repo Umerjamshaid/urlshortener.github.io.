@@ -133,13 +133,15 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
         <!-- Add logo inside the navbar-brand -->
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="{% url 'about' %}">
           <img
-            src="{% static 'img/wallpaperflare.com_wallpaper.jpg' %}"
-            alt="Logo"
+            src="{% static 'img/www.png' %}"
+            alt="logo"
+            style="width: 40px; height: 40px"
           />
           URL Shortener
         </a>
+
         <button
           class="navbar-toggler"
           type="button"
@@ -157,233 +159,13 @@
               <a class="nav-link" href="{% url 'index' %}">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Features</a>
+              <a class="nav-link" href="{% url 'about' %}">Features</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'about' %}">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'youtube' %}">YouTube</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <!------------navbar end-------------->
-
-    <!-- Main content -->
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-md-8">
-          <h1 class="text-center">Shorten Your URL</h1>
-          <form id="url-form">
-            <div class="form-group">
-              <label for="original-url">Enter URL:</label>
-              <input
-                type="url"
-                id="original-url"
-                class="form-control"
-                placeholder="https://example.com"
-                required
-              />
-            </div>
-            <button type="submit" class="btn btn-primary btn-block">
-              Shorten URL
-            </button>
-          </form>
-          <div id="result" class="mt-4"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="text-center">
-      <div class="container">
-        <!-- Social Media Icons -->
-        <div class="social-icons mb-3">
-          <a href="#" class="text-white mx-2">
-            <i class="ri-twitter-fill" style="color: #1da1f2"></i>
-          </a>
-
-          <a href="#" class="text-white mx-2">
-            <i class="ri-facebook-fill" style="color: #1877f2"></i>
-          </a>
-
-          <a href="#" class="text-white mx-2">
-            <i class="ri-medium-fill" style="color: #000000"></i>
-          </a>
-
-          <a
-            href="https://www.linkedin.com/in/umer-jamshaid/"
-            class="text-white mx-2"
-          >
-            <i class="ri-linkedin-fill" style="color: #0a66c2"></i>
-          </a>
-
-          <a href="#" class="text-white mx-2">
-            <i class="ri-youtube-fill" style="color: #ff0000"></i>
-          </a>
-        </div>
-        <p class="mb-0">
-          © 2024 Company, Inc. All rights reserved By Umer Jamshaid And Yahya
-          Rizwan.
-        </p>
-      </div>
-    </footer>
-
-    <!-- jQuery, Bootstrap JS, and AJAX Script -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-    <script>
-      $(document).ready(function () {
-        $("#url-form").submit(function (e) {
-          e.preventDefault();
-          const originalUrl = $("#original-url").val();
-          $.ajax({
-            url: "/api/shorten/", // Correct URL
-            method: "POST",
-            contentType: "application/json",
-            data: JSON.stringify({ original_url: originalUrl }),
-            success: function (response) {
-              $("#result").html(`
-                <div class="alert alert-success">
-                  Shortened URL: <a href="${response.short_url}" class="shortened-url" target="_blank">${response.short_url}</a>
-                </div>
-              `);
-            },
-            error: function () {
-              $("#result").html(`
-                <div class="alert alert-danger">
-                  Something went wrong, please try again.
-                </div>
-              `);
-            },
-          });
-        });
-      });
-    </script>
-  </body>
-</html>
-
-{% comment %} <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>URL Shortener</title>
-    {% load static %}
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <style>
-      /* Basic Styling */
-      body {
-        padding-top: 60px; /* Space for navbar */
-      }
-
-      /* Navbar */
-      .navbar {
-        background: linear-gradient(145deg, #141e30, #243b55);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      }
-
-      .navbar-brand img {
-        filter: drop-shadow(2px 4px 6px black);
-      }
-
-      .navbar-nav .nav-link {
-        font-weight: bold;
-        color: white !important;
-        transition: color 0.3s ease;
-      }
-
-      .navbar-nav .nav-link:hover {
-        color: #00bcd4 !important; /* Highlight effect */
-        text-shadow: 1px 1px 5px rgba(0, 188, 212, 0.7);
-      }
-
-      /* Main content styles */
-      h1 {
-        text-align: center;
-        margin-top: 40px;
-      }
-
-      /* Footer */
-      footer {
-        margin-top: 60px;
-        background: linear-gradient(145deg, #243b55, #141e30);
-        box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.3);
-        color: white;
-        padding: 30px 0;
-        text-align: center;
-      }
-
-      footer p {
-        margin-top: 20px;
-        font-size: 1rem;
-      }
-
-      .social-icons a {
-        text-decoration: none;
-        color: white;
-        margin: 0 10px;
-      }
-
-      .social-icons i {
-        font-size: 1.5rem;
-        transition: transform 0.2s ease;
-      }
-
-      .social-icons i:hover {
-        transform: scale(1.2);
-      }
-    </style>
-  </head>
-  <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-      <div class="container">
-        <a class="navbar-brand" href="#">
-          <img
-            src="{% static 'img/wallpaperflare.com_wallpaper.jpg' %}"
-            alt="Logo"
-          />
-          URL Shortener
-        </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarResponsive"
-          aria-controls="navbarResponsive"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          Menu
-          <i class="fas fa-bars"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="{% url 'index' %}">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Features</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'about' %}">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'youtube' %}">YouTube</a>
+              <a class="nav-link" href="{% url 'youtube'%}">YouTube</a>
             </li>
           </ul>
         </div>
@@ -421,22 +203,34 @@
     <!-- Footer -->
     <footer class="text-center">
       <div class="container">
+        <!-- Social Media Icons -->
         <div class="social-icons mb-3">
-          <a href="#" class="text-white mx-2"
-            ><i class="fab fa-twitter" style="color: #1da1f2"></i
-          ></a>
-          <a href="#" class="text-white mx-2"
-            ><i class="fab fa-facebook" style="color: #1877f2"></i
-          ></a>
-          <a href="#" class="text-white mx-2"
-            ><i class="fab fa-medium" style="color: #000000"></i
-          ></a>
-          <a href="#" class="text-white mx-2"
-            ><i class="fab fa-linkedin" style="color: #0a66c2"></i
-          ></a>
-          <a href="#" class="text-white mx-2"
-            ><i class="fab fa-youtube" style="color: #ff0000"></i
-          ></a>
+          <a href="#" class="text-white mx-2">
+            <i class="ri-twitter-fill" style="color: #1da1f2"></i>
+          </a>
+
+          <a href="#" class="text-white mx-2">
+            <i class="ri-facebook-fill" style="color: #1877f2"></i>
+          </a>
+
+          <a
+            href="https://medium.com/minamali"
+            target="_blank"
+            class="text-white mx-2"
+          >
+            <i class="ri-medium-fill" style="color: #000000"></i>
+          </a>
+
+          <a
+            href="https://www.linkedin.com/in/umer-jamshaid/"
+            class="text-white mx-2"
+          >
+            <i class="ri-linkedin-fill" style="color: #0a66c2"></i>
+          </a>
+
+          <a href="#" class="text-white mx-2">
+            <i class="ri-youtube-fill" style="color: #ff0000"></i>
+          </a>
         </div>
         <p class="mb-0">
           © 2024 Company, Inc. All rights reserved By Umer Jamshaid And Yahya
@@ -445,8 +239,39 @@
       </div>
     </footer>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery, Bootstrap JS, and AJAX Script -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    {% comment %}
+    <script>
+      $(document).ready(function () {
+        $("#url-form").submit(function (e) {
+          e.preventDefault();
+          const originalUrl = $("#original-url").val();
+          $.ajax({
+            url: "/api/shorten/", // Correct URL
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({ original_url: originalUrl }),
+            success: function (response) {
+              $("#result").html(`
+                <div class="alert alert-success">
+                  Shortened URL: <a href="${response.short_url}" class="shortened-url" target="_blank">${response.short_url}</a>
+                </div>
+              `);
+            },
+            error: function () {
+              $("#result").html(`
+                <div class="alert alert-danger">
+                  Something went wrong, please try again.
+                </div>
+              `);
+            },
+          });
+        });
+      });
+    </script>
+    {% endcomment %}
   </body>
 </html>
-{% endcomment %}
+{% comment %} {% endcomment %}

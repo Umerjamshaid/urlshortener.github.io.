@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include  
-from shortener.views import redirect_url 
+from shortener.views import redirect_url, about
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('shortener.urls')),  # Include the URLs from the shortener app
     path('<str:short_url>/', redirect_url, name='redirect'),  # Add this line
+    path('about/', about, name='about'),
     
 ]
 
