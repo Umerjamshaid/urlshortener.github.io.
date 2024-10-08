@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>YouTube Video Downloader</title>
 
-    <!-- Bootstrap CSS and Font Awesome -->
+    <!-- Bootstrap CSS -->
     <link
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
       rel="stylesheet"
@@ -20,7 +20,12 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
     <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    />
+    <!-- RemixIcon CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css"
       rel="stylesheet"
     />
 
@@ -81,7 +86,7 @@
 
       /* Footer */
       footer {
-        margin-top: auto;
+        margin-top: auto; /* Keeps footer at the bottom */
         background: linear-gradient(145deg, #243b55, #141e30);
         box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.3);
         border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -95,10 +100,25 @@
         font-size: 1rem;
         text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
       }
-
+      /* Add glow and hover effect to footer text */
       footer p:hover {
         color: #00bcd4;
         text-shadow: 0 0 10px rgba(0, 188, 212, 0.7);
+      }
+
+      /* Social icons size */
+      .social-icons a {
+        text-decoration: none; /* Remove the underline */
+      }
+
+      .social-icons i {
+        font-size: 1.5rem;
+        margin: 0 10px;
+        transition: transform 0.2s ease;
+      }
+
+      .social-icons i:hover {
+        transform: scale(1.2); /* Add hover effect */
       }
     </style>
   </head>
@@ -131,7 +151,7 @@
               <a class="nav-link" href="{% url 'index' %}">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'base' %}">Features</a>
+              <a class="nav-link" href="{% url 'base' %}">Guide</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'about' %}">About</a>
@@ -197,22 +217,32 @@
     <!-- Footer -->
     <footer class="text-center">
       <div class="container">
-        <!-- Social Media Icons -->
         <div class="social-icons mb-3">
           <a href="#" class="text-white mx-2">
-            <i class="fab fa-twitter" style="color: #1da1f2"></i>
+            <i class="ri-twitter-fill" style="color: #1da1f2"></i>
           </a>
+
           <a href="#" class="text-white mx-2">
-            <i class="fab fa-facebook" style="color: #1877f2"></i>
+            <i class="ri-facebook-fill" style="color: #1877f2"></i>
           </a>
-          <a href="#" class="text-white mx-2">
-            <i class="fab fa-medium" style="color: #000000"></i>
+
+          <a
+            href="https://medium.com/minamali"
+            target="_blank"
+            class="text-white mx-2"
+          >
+            <i class="ri-medium-fill" style="color: #000000"></i>
           </a>
-          <a href="#" class="text-white mx-2">
-            <i class="fab fa-linkedin" style="color: #0a66c2"></i>
+
+          <a
+            href="https://www.linkedin.com/in/umer-jamshaid/"
+            class="text-white mx-2"
+          >
+            <i class="ri-linkedin-fill" style="color: #0a66c2"></i>
           </a>
+
           <a href="#" class="text-white mx-2">
-            <i class="fab fa-youtube" style="color: #ff0000"></i>
+            <i class="ri-youtube-fill" style="color: #ff0000"></i>
           </a>
         </div>
         <p class="mb-0">
