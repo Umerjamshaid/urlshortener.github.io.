@@ -1,6 +1,6 @@
 # 🚀 URL Shortener with Django
 
-![banner](screenshots/catalog.jpg)
+![banner](https://github.com/Umerjamshaid/urlshortener/blob/main/Screenshots/catalog.jpg)
 
 [![Django Version](https://img.shields.io/badge/Django-4.1.13-brightgreen.svg)](https://www.djangoproject.com/)
 [![Python Version](https://img.shields.io/badge/Python-3.12-blue.svg)](https://www.python.org/)
@@ -30,15 +30,15 @@ Welcome to the **URL Shortener** project built with **Django**! This project all
 
 ### Home Page
 
-![Home Page](screenshots/home.png)
+![Home Page](https://github.com/Umerjamshaid/urlshortener/blob/main/Screenshots/home.png)
 
-### Shorten URL Page
+### About Us Page
 
-![Shorten URL Page](screenshots/about.png)
+![About Us Page Page](https://github.com/Umerjamshaid/urlshortener/blob/main/Screenshots/about.png)
 
 ### YouTube Downloader
 
-![YouTube Downloader](screenshots/youtube.png)
+![YouTube Downloader](https://github.com/Umerjamshaid/urlshortener/blob/main/Screenshots/youtube.png)
 
 ---
 
@@ -92,20 +92,20 @@ Now, open your browser and visit **`http://127.0.0.1:8000`**. Your URL Shortener
 
 - This is the landing page where you can shorten URLs. Just enter a long URL, and a shortened link will be generated.
 
-![Shorten URL Page](screenshots/home.png)
+![Home Page](https://github.com/Umerjamshaid/urlshortener/blob/main/Screenshots/home.png)
 
-### 2. **Shortened URL**
+### 2. **Shorten URL Page**
 
 - Once you enter a URL, the application will generate a short link. Example: **`http://127.0.0.1:8000/abc123/`**
 - Share the short link, and anyone visiting it will be redirected to the original URL.
 
-![Shortened URL](screenshots/result.png)
+![Shorten URL Page](https://github.com/Umerjamshaid/urlshortener/blob/main/Screenshots/result.png)
 
 ### 3. **YouTube Video Downloader**
 
 - Go to the YouTube section, enter the video link, select the desired resolution, and download your video locally!
 
-![YouTube Downloader](screenshots/youtube.png)
+![YouTube Downloader](https://github.com/Umerjamshaid/urlshortener/blob/main/Screenshots/youtube.png)
 
 ---
 
@@ -188,10 +188,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **UI Enhancements**: Further improve the UI to enhance the user experience.
 
 ---
-
-### Additional Badges
-
-Here are some additional badges you can use if you configure CI/CD services like Travis CI and Codecov:
-
-- [![Build Status](https://travis-ci.com/your-username/url-shortener.svg?branch=main)](https://travis-ci.com/your-username/url-shortener)
-- [![codecov](https://codecov.io/gh/Umerjamshaid/url-short
