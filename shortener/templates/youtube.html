@@ -86,7 +86,7 @@
 
       /* Footer */
       footer {
-        margin-top: auto; /* Keeps footer at the bottom */
+        margin-top: auto;
         background: linear-gradient(145deg, #243b55, #141e30);
         box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.3);
         border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -100,7 +100,7 @@
         font-size: 1rem;
         text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
       }
-      /* Add glow and hover effect to footer text */
+
       footer p:hover {
         color: #00bcd4;
         text-shadow: 0 0 10px rgba(0, 188, 212, 0.7);
@@ -108,7 +108,7 @@
 
       /* Social icons size */
       .social-icons a {
-        text-decoration: none; /* Remove the underline */
+        text-decoration: none;
       }
 
       .social-icons i {
@@ -118,7 +118,7 @@
       }
 
       .social-icons i:hover {
-        transform: scale(1.2); /* Add hover effect */
+        transform: scale(1.2);
       }
     </style>
   </head>
@@ -129,10 +129,11 @@
       <div class="container">
         <a class="navbar-brand" href="#">
           <img
-            src="{% static 'img/wallpaperflare.com_wallpaper.jpg' %}"
-            alt="Logo"
+            src="{% static 'img/www.png' %}"
+            alt="logo"
+            style="width: 40px; height: 40px"
           />
-          URL Shortener
+          YouTube Downloader
         </a>
         <button
           class="navbar-toggler"
@@ -147,7 +148,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
+            <li class="nav-item active">
               <a class="nav-link" href="{% url 'index' %}">Home</a>
             </li>
             <li class="nav-item">
@@ -156,55 +157,57 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'about' %}">About</a>
             </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="{% url 'youtube' %}">YouTube</a>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'youtube'%}">YouTube</a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
-    <!------------navbar end-------------->
 
     <!-- Main content -->
-    <div class="container">
+    <div class="container mt-5">
       <div class="row justify-content-center">
         <div class="col-md-8">
           <h1 class="text-center">YouTube Video Downloader</h1>
 
-          <form method="POST">
+          <!-- Form to input video URL and download format -->
+          <form method="POST" action="{% url 'youtube' %}">
             {% csrf_token %}
             <div class="form-group">
-              <label for="link">Enter YouTube Video Link:</label>
+              <label for="video_url">Enter YouTube Video Link:</label>
               <input
                 type="text"
-                id="link"
-                name="link"
+                id="video_url"
+                name="video_url"
                 class="form-control"
                 placeholder="https://youtube.com/your-video-link"
                 required
               />
             </div>
             <br />
-            {% if resolutions %}
+
+            <!-- If formats are available, show them -->
+            {% if formats %}
             <div class="form-group">
-              <label for="resolution">Select Resolution:</label>
-              <select name="resolution" id="resolution" class="form-control">
-                <option value="">Lowest Resolution</option>
-                {% for stream in resolutions %}
-                <option value="{{ stream.resolution }}">
-                  {{ stream.resolution }} ({{ stream.fps }} fps, {{
-                  stream.mime_type }})
+              <label for="format">Select Resolution:</label>
+              <select name="format_id" id="format" class="form-control">
+                {% for fmt in formats %}
+                <option value="{{ fmt.format_id }}">
+                  {{ fmt.height }}p - {{ fmt.ext }} ({{ fmt.fps }} fps)
                 </option>
                 {% endfor %}
               </select>
             </div>
             <br />
             {% endif %}
+
             <button type="submit" class="btn btn-primary btn-block">
               Download
             </button>
           </form>
 
+          <!-- Display message or error if available -->
           {% if message %}
           <p>{{ message }}</p>
           {% endif %} {% if error %}
@@ -221,38 +224,18 @@
           <a href="#" class="text-white mx-2">
             <i class="ri-twitter-fill" style="color: #1da1f2"></i>
           </a>
-
           <a href="#" class="text-white mx-2">
             <i class="ri-facebook-fill" style="color: #1877f2"></i>
           </a>
-
-          <a
-            href="https://medium.com/minamali"
-            target="_blank"
-            class="text-white mx-2"
-          >
-            <i class="ri-medium-fill" style="color: #000000"></i>
-          </a>
-
-          <a
-            href="https://www.linkedin.com/in/umer-jamshaid/"
-            class="text-white mx-2"
-          >
-            <i class="ri-linkedin-fill" style="color: #0a66c2"></i>
-          </a>
-
           <a href="#" class="text-white mx-2">
             <i class="ri-youtube-fill" style="color: #ff0000"></i>
           </a>
         </div>
-        <p class="mb-0">
-          © 2024 Company, Inc. All rights reserved By Umer Jamshaid And Yahya
-          Rizwan.
-        </p>
+        <p class="mb-0">© 2024 YouTube Downloader</p>
       </div>
     </footer>
 
-    <!-- jQuery, Bootstrap JS, and AJAX Script -->
+    <!-- jQuery, Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
   </body>
