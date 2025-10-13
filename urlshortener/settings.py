@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'channels',
     'shortener',
 ]
 
@@ -73,6 +74,9 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'urlshortener.wsgi.application'
+
+# Channels
+ASGI_APPLICATION = 'urlshortener.asgi.application'
 
 
 # Database

@@ -1,0 +1,196 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block extrastyle %}
+<style>
+    .dashboard-container {
+        padding: 20px;
+        background: linear-gradient(to bottom right, #f9fafb, #f3f4f6);
+    }
+
+    .stat-card {
+        background: white;
+        border-radius: 12px;
+        padding: 24px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        border: 1px solid #e5e7eb;
+        transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .stat-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+
+    .stat-value {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #111827;
+    }
+
+    .stat-label {
+        color: #6b7280;
+        font-size: 0.875rem;
+        font-weight: 500;
+        margin-bottom: 8px;
+    }
+
+    .stat-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+    }
+
+    .icon-blue {
+        background: linear-gradient(135deg, #3b82f6, #2563eb);
+    }
+
+    .icon-purple {
+        background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+    }
+
+    .icon-pink {
+        background: linear-gradient(135deg, #ec4899, #db2777);
+    }
+
+    .table-container {
+        background: white;
+        border-radius: 12px;
+        padding: 24px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        border: 1px solid #e5e7eb;
+    }
+
+    .table-container h2 {
+        margin-top: 0;
+        color: #111827;
+        font-size: 1.25rem;
+        margin-bottom: 20px;
+    }
+
+    .url-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .url-table th {
+        background: #f9fafb;
+        padding: 12px;
+        text-align: left;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #6b7280;
+        text-transform: uppercase;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    .url-table td {
+        padding: 16px 12px;
+        border-bottom: 1px solid #f3f4f6;
+    }
+
+    .url-table tr:hover {
+        background: #f9fafb;
+    }
+
+    .progress-bar {
+        background: #e5e7eb;
+        border-radius: 9999px;
+        height: 8px;
+        overflow: hidden;
+        margin-top: 8px;
+    }
+
+    .progress-fill {
+        height: 100%;
+        background: linear-gradient(to right, #3b82f6, #8b5cf6);
+        transition: width 0.5s ease;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <h1 style="font-size: 2rem; font-weight: bold; margin-bottom: 24px; color: #111827;">
+        Dashboard Overview
+    </h1>
+
+    <div class="stat-grid">
+        <div class="stat-card">
+            <div class="stat-icon icon-blue">
+                <svg width="24" height="24" fill="white" viewBox="0 0 24 24">
+                    <path d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <p class="stat-label">Total URLs</p>
+            <p class="stat-value">{{ total_urls }}</p>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon icon-purple">
+                <svg width="24" height="24" fill="white" viewBox="0 0 24 24">
+                    <path d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <p class="stat-label">Total Clicks</p>
+            <p class="stat-value">{{ total_clicks|default:"0" }}</p>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon icon-pink">
+                <svg width="24" height="24" fill="white" viewBox="0 0 24 24">
+                    <path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <p class="stat-label">Total Users</p>
+            <p class="stat-value">{{ total_users }}</p>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <h2>Top Performing URLs</h2>
+        <table class="url-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Short Code</th>
+                    <th>Original URL</th>
+                    <th>Clicks</th>
+                    <th>Performance</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for url in top_urls %}
+                <tr>
+                    <td><strong>{{ forloop.counter }}</strong></td>
+                    <td><code style="background: #f3f4f6; padding: 4px 8px; border-radius: 4px;">{{ url.short_code }}</code></td>
+                    <td style="max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                        {{ url.original_url }}
+                    </td>
+                    <td><strong>{{ url.click_count }}</strong></td>
+                    <td style="width: 200px;">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: {% if forloop.first %}100{% else %}{% widthratio url.click_count top_urls.0.click_count 100 %}{% endif %}%;"></div>
+                        </div>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" style="text-align: center; color: #9ca3af;">No URLs yet</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
