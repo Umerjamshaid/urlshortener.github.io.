@@ -15,18 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from shortener.views import redirect_url, about
+from shortener.views import redirect_url, about, dashboard
 from django.conf import settings
 from django.conf.urls.static import static
-from shortener.admin import admin_site
 
 urlpatterns = [
-    path('admin/', admin_site.urls),
-    path('about/', about, name='about'),
+    path('admin/', admin.site.urls),
     path('', include('shortener.urls')),  # Include the URLs from the shortener app
-    path('<str:short_url>/', redirect_url, name='redirect'),  # Add this line
 
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

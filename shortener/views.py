@@ -167,9 +167,13 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+from django.db.models import Count
+from django.utils import timezone
+from datetime import timedelta
 from yt_dlp import YoutubeDL
 from pytube import YouTube
-from .models import DownloadTask
+from .models import URL, URLClick, DownloadTask
 from .consumers import DownloadProgressConsumer
 
 # Define download directory
@@ -319,6 +323,27 @@ def download_video_async(task_id):
         task.status = 'downloading'
         task.save()
 
+        # First, get available formats to validate the requested format
+        ydl_opts_check = {
+            'quiet': True,
+            'no_warnings': True,
+            'extract_flat': False,
+        }
+
+        with YoutubeDL(ydl_opts_check) as ydl:
+            info = ydl.extract_info(task.video_url, download=False)
+            available_formats = [fmt.get('format_id') for fmt in info.get('formats', [])]
+
+        # Check if requested format is available
+        if task.format_id not in available_formats:
+            # Try to find a similar format or use best available
+            if available_formats:
+                # Use the first available format as fallback
+                task.format_id = available_formats[0]
+                task.save()
+            else:
+                raise Exception("No formats available for this video")
+
         ydl_opts = {
             'format': task.format_id,
             'outtmpl': os.path.join(DOWNLOAD_DIR, '%(title)s.%(ext)s'),
@@ -348,6 +373,72 @@ def download_video_async(task_id):
             'error': str(e)
         }
         DownloadProgressConsumer.send_progress_update(task_id, error_data)
+
+def dashboard(request):
+    """Analytics dashboard view - separate from Django admin"""
+    # Calculate statistics
+    total_urls = URL.objects.count()
+    total_clicks = URLClick.objects.count()
+    total_users = URL.objects.values('user').distinct().count()
+
+    # Last 7 days data
+    week_ago = timezone.now() - timedelta(days=7)
+    recent_clicks = URLClick.objects.filter(clicked_at__gte=week_ago)
+
+    # Top URLs
+    top_urls = URL.objects.annotate(
+        click_count=Count('clicks')
+    ).order_by('-click_count')[:10]
+
+    # Calculate max clicks for progress bars
+    max_clicks = top_urls[0].click_count if top_urls else 0
+
+    # Daily clicks for chart
+    daily_clicks = []
+    for i in range(7):
+        day = timezone.now() - timedelta(days=6-i)
+        clicks = URLClick.objects.filter(
+            clicked_at__date=day.date()
+        ).count()
+        daily_clicks.append({
+            'date': day.strftime('%a'),
+            'clicks': clicks
+        })
+
+    # Device stats
+    device_stats = URLClick.objects.values('device_type').annotate(
+        count=Count('id')
+    )
+
+    # Recent downloads
+    recent_downloads = DownloadTask.objects.order_by('-created_at')[:5]
+
+    # User information
+    if request.user.is_authenticated:
+        user_info = {
+            'name': request.user.get_full_name() or request.user.username,
+            'email': request.user.email,
+        }
+    else:
+        from .utils import get_client_ip
+        user_info = {
+            'ip': get_client_ip(request),
+        }
+
+    context = {
+        'total_urls': total_urls,
+        'total_clicks': total_clicks,
+        'total_users': total_users,
+        'top_urls': top_urls,
+        'max_clicks': max_clicks,
+        'daily_clicks': daily_clicks,
+        'device_stats': device_stats,
+        'recent_downloads': recent_downloads,
+        'user_info': user_info,
+        'is_authenticated': request.user.is_authenticated,
+    }
+
+    return render(request, 'dashboard.html', context)
 
 def download_thumbnail(request):
     """Downloads the YouTube video thumbnail."""
