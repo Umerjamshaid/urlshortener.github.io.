@@ -4,22 +4,19 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import URL
 from .serializers import URLSerializer
-from django.shortcuts import redirect, get_object_or_404
+from django.shortcuts import redirect, get_object_or_404, render
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from django.shortcuts import render, redirect
 from rest_framework import status  
 from .models import URL
 from .serializers import URLSerializer
 import random
 import string
-# ======================yt imports=============================
-from django.shortcuts import render
+import io
+import re
 import os
 import yt_dlp
 from django.http import HttpResponse
-from django.shortcuts import render
-from pytube import YouTube
 
 
 
@@ -68,9 +65,30 @@ def redirect_url(request, short_code):
 def index(request):
     if request.method == 'POST':
         original_url = request.POST.get('url')
-        short_code = generate_short_code()
+        custom_alias = request.POST.get('custom_alias', '').strip()
+
+        if custom_alias:
+            # Validate alias: alphanumeric and hyphens only, 3-20 chars
+            if not re.match(r'^[a-zA-Z0-9_-]{3,20}$', custom_alias):
+                return render(request, 'index.html', {
+                    'error': 'Custom alias must be 3–20 characters and contain only letters, numbers, hyphens, or underscores.',
+                    'url_value': original_url,
+                })
+            if URL.objects.filter(short_code=custom_alias).exists():
+                return render(request, 'index.html', {
+                    'error': 'That custom alias is already taken. Please choose another.',
+                    'url_value': original_url,
+                })
+            short_code = custom_alias
+        else:
+            short_code = generate_short_code()
+
         url = URL.objects.create(original_url=original_url, short_code=short_code)
-        return render(request, 'index.html', {'short_url': request.build_absolute_uri(f'/{url.short_code}/')})
+        short_url = request.build_absolute_uri(f'/{url.short_code}/')
+        return render(request, 'index.html', {
+            'short_url': short_url,
+            'short_code': url.short_code,
+        })
     return render(request, 'index.html')
 
 
@@ -163,16 +181,14 @@ import os
 import requests
 import uuid
 import threading
+import qrcode
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-from django.utils.decorators import method_decorator
-from django.contrib.auth.decorators import login_required
 from django.db.models import Count
 from django.utils import timezone
 from datetime import timedelta
 from yt_dlp import YoutubeDL
-from pytube import YouTube
 from .models import URL, URLClick, DownloadTask
 from .consumers import DownloadProgressConsumer
 
@@ -230,10 +246,9 @@ def youtube(request):
                         seen_formats.add(fmt.get('format_id'))
                         unique_formats.append(fmt)
 
-                # Fetch thumbnail using pytube
-                yt = YouTube(video_url)
-                thumbnail_url = yt.thumbnail_url
-                video_title = yt.title
+                # Fetch thumbnail and title using yt-dlp (no pytube dependency)
+                thumbnail_url = video_info.get('thumbnail', '')
+                video_title = video_info.get('title', 'Unknown Title')
 
                 # Add the formats and thumbnail to the context
                 context['formats'] = unique_formats[:20]  # Limit to 20 formats
@@ -457,3 +472,21 @@ def download_thumbnail(request):
                 return HttpResponse(f"Error downloading thumbnail: {str(e)}", status=500)
 
     return HttpResponse("Invalid request parameters.", status=400)
+
+
+def qr_code(request, short_code):
+    """Generate and return a QR code PNG for a given short code."""
+    url_obj = get_object_or_404(URL, short_code=short_code)
+    short_url = request.build_absolute_uri(f'/{url_obj.short_code}/')
+
+    img = qrcode.make(short_url)
+    buffer = io.BytesIO()
+    img.save(buffer, format='PNG')
+    buffer.seek(0)
+    return HttpResponse(buffer, content_type='image/png')
+
+
+def url_list(request):
+    """Show a list of recent shortened URLs with click counts."""
+    urls = URL.objects.annotate(click_count=Count('clicks')).order_by('-created_at')[:50]
+    return render(request, 'url_list.html', {'urls': urls})
