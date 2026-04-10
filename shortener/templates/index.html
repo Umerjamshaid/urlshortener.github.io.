@@ -5,270 +5,309 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>URL Shortener</title>
-    <!-- Bootstrap CSS -->
-    <link
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    />
-    <!-- RemixIcon CDN -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css"
-      rel="stylesheet"
-    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet" />
     <style>
       body {
-        background: linear-gradient(120deg, #f8f9fa, #e0e0e0);
+        background: linear-gradient(135deg, #141e30, #243b55);
+        min-height: 100vh;
         display: flex;
         flex-direction: column;
-        min-height: 100vh;
         padding-top: 70px;
         margin: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       }
 
-      /* Navbar (Header) */
       .navbar {
-        background: linear-gradient(145deg, #141e30, #243b55);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(20, 30, 48, 0.95);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 2px 20px rgba(0,0,0,0.3);
       }
 
-      .navbar-brand img {
-        filter: drop-shadow(2px 4px 6px black); /* Add shadow to the logo */
-      }
+      .navbar-brand img { filter: drop-shadow(2px 4px 6px black); }
 
       .navbar-nav .nav-link {
-        font-weight: bold;
-        color: white !important;
-        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        font-weight: 600;
+        color: rgba(255,255,255,0.85) !important;
         transition: color 0.3s ease;
       }
+      .navbar-nav .nav-link:hover { color: #00bcd4 !important; }
 
-      .navbar-nav .nav-link:hover {
-        color: #00bcd4 !important; /* Highlight effect */
-        text-shadow: 1px 1px 5px rgba(0, 188, 212, 0.7);
-      }
-
-      /* Main content styles */
-      .shortened-url {
-        font-weight: bold;
-        color: #007bff;
-      }
-
-      .form-control,
-      .btn {
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        transition: all 0.3s ease-in-out;
-      }
-
-      .form-control:hover,
-      .btn:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-      }
-
-      .btn-primary {
-        background: linear-gradient(45deg, #007bff, #0056b3);
-        border: none;
-      }
-
-      .btn-primary:hover {
-        background: linear-gradient(45deg, #0056b3, #003f8b);
-      }
-
-      /* Footer */
-      footer {
-        margin-top: auto; /* Keeps footer at the bottom */
-        background: linear-gradient(145deg, #243b55, #141e30);
-        box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.3);
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      .hero-section {
+        text-align: center;
         color: white;
-        padding: 30px 0;
+        padding: 60px 20px 30px;
+      }
+      .hero-section h1 {
+        font-size: 2.8rem;
+        font-weight: 700;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+      }
+      .hero-section p { font-size: 1.15rem; opacity: 0.85; }
+
+      .main-card {
+        background: rgba(255,255,255,0.07);
+        border: 1px solid rgba(255,255,255,0.15);
+        border-radius: 20px;
+        padding: 35px;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        backdrop-filter: blur(10px);
+        color: white;
+      }
+
+      .form-control, .input-group-text {
+        background: rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.2);
+        color: white;
+        border-radius: 10px;
+      }
+      .form-control::placeholder { color: rgba(255,255,255,0.5); }
+      .form-control:focus {
+        background: rgba(255,255,255,0.15);
+        border-color: #00bcd4;
+        color: white;
+        box-shadow: 0 0 0 0.2rem rgba(0,188,212,0.25);
+      }
+      .form-label { color: rgba(255,255,255,0.9); font-weight: 500; }
+      .form-text { color: rgba(255,255,255,0.5) !important; }
+
+      .btn-shorten {
+        background: linear-gradient(45deg, #00bcd4, #0288d1);
+        border: none;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 1.05rem;
+        padding: 12px;
+        width: 100%;
+        color: white;
+        transition: all 0.3s ease;
+      }
+      .btn-shorten:hover {
+        background: linear-gradient(45deg, #0097a7, #01579b);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0,188,212,0.4);
+        color: white;
+      }
+
+      .result-card {
+        background: rgba(0,188,212,0.12);
+        border: 1px solid rgba(0,188,212,0.4);
+        border-radius: 15px;
+        padding: 25px;
+        margin-top: 25px;
+      }
+      .result-card .short-url-link {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #00e5ff;
+        word-break: break-all;
+      }
+      .result-card .short-url-link:hover { color: #80deea; }
+
+      .btn-copy {
+        background: rgba(255,255,255,0.15);
+        border: 1px solid rgba(255,255,255,0.3);
+        color: white;
+        border-radius: 8px;
+        transition: all 0.2s;
+      }
+      .btn-copy:hover { background: rgba(255,255,255,0.25); color: white; }
+
+      .qr-container {
+        background: white;
+        border-radius: 12px;
+        padding: 12px;
+        display: inline-block;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      }
+
+      .alert-danger-custom {
+        background: rgba(244,67,54,0.15);
+        border: 1px solid rgba(244,67,54,0.4);
+        color: #ffcdd2;
+        border-radius: 10px;
+        padding: 12px 18px;
+        margin-top: 15px;
+      }
+
+      .features-row {
+        margin-top: 50px;
+      }
+      .feature-item {
+        text-align: center;
+        color: rgba(255,255,255,0.8);
+        padding: 20px;
+      }
+      .feature-item i {
+        font-size: 2.2rem;
+        color: #00bcd4;
+        margin-bottom: 12px;
+      }
+      .feature-item h5 { font-weight: 600; color: white; }
+
+      footer {
+        margin-top: auto;
+        background: rgba(10, 15, 25, 0.9);
+        border-top: 1px solid rgba(255,255,255,0.08);
+        color: rgba(255,255,255,0.7);
+        padding: 25px 0;
         text-align: center;
       }
-
-      footer p {
-        margin-top: 20px;
-        font-size: 1rem;
-        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-      }
-
-      /* Add glow and hover effect to footer text */
-      footer p:hover {
-        color: #00bcd4;
-        text-shadow: 0 0 10px rgba(0, 188, 212, 0.7);
-      }
-
-      /* Social icons size */
-      .social-icons a {
-        text-decoration: none; /* Remove the underline */
-      }
-
-      .social-icons i {
-        font-size: 1.5rem;
-        margin: 0 10px;
-        transition: transform 0.2s ease;
-      }
-
-      .social-icons i:hover {
-        transform: scale(1.2); /* Add hover effect */
-      }
+      .social-icons a { text-decoration: none; }
+      .social-icons i { font-size: 1.4rem; margin: 0 8px; transition: transform 0.2s; }
+      .social-icons i:hover { transform: scale(1.3); }
     </style>
   </head>
 
   <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
       <div class="container">
         <a class="navbar-brand" href="{% url 'index' %}">
-          <img
-            src="{% static 'img/www.png' %}"
-            alt="logo"
-            style="width: 40px; height: 40px"
-          />
-          URL Shortener
+          <img src="{% static 'img/www.png' %}" alt="logo" style="width:38px;height:38px;" />
+          <span style="font-weight:700;">URL Shortener</span>
         </a>
-
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="{% url 'index' %}">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'base' %}">Guide</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'about' %}">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'youtube'%}">YouTube</a>
-            </li>
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link active" href="{% url 'index' %}"><i class="ri-home-line me-1"></i>Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'url_list' %}"><i class="ri-links-line me-1"></i>My URLs</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'dashboard' %}"><i class="ri-bar-chart-2-line me-1"></i>Analytics</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'youtube' %}"><i class="ri-youtube-line me-1"></i>YouTube</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'about' %}"><i class="ri-information-line me-1"></i>About</a></li>
           </ul>
         </div>
       </div>
     </nav>
-    <!------------navbar end-------------->
 
-    <!-- Main content -->
-    <div class="container mt-5">
-      <h1 class="text-center">URL Shortener</h1>
-      <form method="POST">
-        {% csrf_token %}
-        <div class="form-group">
-          <label for="url">Enter a URL:</label>
-          <input
-            type="url"
-            id="url"
-            name="url"
-            class="form-control"
-            placeholder="https://example.com"
-            required
-          />
+    <!-- Hero -->
+    <div class="hero-section">
+      <h1><i class="ri-links-fill me-2"></i>Shorten Your URLs</h1>
+      <p>Fast, free, and simple link shortening with QR codes, analytics, and custom aliases.</p>
+    </div>
+
+    <!-- Main Card -->
+    <div class="container" style="max-width:680px;">
+      <div class="main-card">
+        <form method="POST" id="shortenForm">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="url" class="form-label"><i class="fa-solid fa-link me-1"></i> Long URL</label>
+            <input type="url" id="url" name="url" class="form-control form-control-lg"
+                   placeholder="https://example.com/very/long/url"
+                   value="{{ url_value|default:'' }}" required />
+          </div>
+          <div class="mb-4">
+            <label for="custom_alias" class="form-label">
+              <i class="fa-solid fa-tag me-1"></i> Custom Alias <span class="badge bg-info ms-1" style="font-size:0.65rem;">Optional</span>
+            </label>
+            <div class="input-group">
+              <span class="input-group-text" style="background:rgba(0,188,212,0.2);border-color:rgba(255,255,255,0.2);color:#00e5ff;font-size:0.85rem;">
+                {{ request.get_host }}/
+              </span>
+              <input type="text" id="custom_alias" name="custom_alias" class="form-control"
+                     placeholder="my-brand (optional)" pattern="[-a-zA-Z0-9_]{3,20}"
+                     title="3–20 characters: letters, numbers, hyphens, underscores" />
+            </div>
+            <div class="form-text">Leave blank for a random code. Use 3–20 letters, numbers, - or _.</div>
+          </div>
+          <button type="submit" class="btn btn-shorten">
+            <i class="fa-solid fa-scissors me-2"></i>Shorten URL
+          </button>
+        </form>
+
+        {% if error %}
+        <div class="alert-danger-custom mt-3">
+          <i class="fa-solid fa-circle-exclamation me-2"></i>{{ error }}
         </div>
-        <button type="submit" class="btn btn-primary btn-block">
-          Shorten URL
-        </button>
-      </form>
-      {% if short_url %}
-      <div class="alert alert-success mt-4">
-        Your shortened URL: <a href="{{ short_url }}">{{ short_url }}</a>
+        {% endif %}
+
+        {% if short_url %}
+        <div class="result-card">
+          <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
+            <div>
+              <div class="text-white-50 small mb-1"><i class="fa-solid fa-check-circle text-success me-1"></i>Your shortened URL is ready!</div>
+              <a href="{{ short_url }}" target="_blank" class="short-url-link">{{ short_url }}</a>
+            </div>
+            <button class="btn btn-copy px-3" onclick="copyToClipboard('{{ short_url }}', this)" title="Copy to clipboard">
+              <i class="fa-regular fa-copy me-1"></i>Copy
+            </button>
+          </div>
+          <div class="text-center mt-3">
+            <div class="text-white-50 small mb-2"><i class="fa-solid fa-qrcode me-1"></i>QR Code</div>
+            <div class="qr-container">
+              <img src="{% url 'qr_code' short_code %}" alt="QR Code" width="160" height="160" />
+            </div>
+            <div class="mt-2">
+              <a href="{% url 'qr_code' short_code %}" download="qr-{{ short_code }}.png" class="btn btn-copy btn-sm mt-1">
+                <i class="fa-solid fa-download me-1"></i>Download QR
+              </a>
+            </div>
+          </div>
+        </div>
+        {% endif %}
       </div>
-      {% endif %}
+
+      <!-- Feature highlights -->
+      <div class="row features-row">
+        <div class="col-4 feature-item">
+          <i class="ri-qr-code-line"></i>
+          <h5>QR Codes</h5>
+          <p class="small">Instant QR code for every shortened link.</p>
+        </div>
+        <div class="col-4 feature-item">
+          <i class="ri-bar-chart-line"></i>
+          <h5>Analytics</h5>
+          <p class="small">Track clicks, devices, and locations.</p>
+        </div>
+        <div class="col-4 feature-item">
+          <i class="ri-edit-line"></i>
+          <h5>Custom Alias</h5>
+          <p class="small">Choose your own memorable short code.</p>
+        </div>
+      </div>
     </div>
 
     <!-- Footer -->
-    <footer class="text-center">
+    <footer>
       <div class="container">
         <div class="social-icons mb-3">
-          <a href="#" class="text-white mx-2">
-            <i class="ri-twitter-fill" style="color: #1da1f2"></i>
-          </a>
-
-          <a href="#" class="text-white mx-2">
-            <i class="ri-facebook-fill" style="color: #1877f2"></i>
-          </a>
-
-          <a
-            href="https://medium.com/minamali"
-            target="_blank"
-            class="text-white mx-2"
-          >
-            <i class="ri-medium-fill" style="color: #000000"></i>
-          </a>
-
-          <a
-            href="https://www.linkedin.com/in/umer-jamshaid/"
-            class="text-white mx-2"
-          >
-            <i class="ri-linkedin-fill" style="color: #0a66c2"></i>
-          </a>
-
-          <a href="#" class="text-white mx-2">
-            <i class="ri-youtube-fill" style="color: #ff0000"></i>
-          </a>
+          <a href="#" class="text-white mx-2"><i class="ri-twitter-fill" style="color:#1da1f2"></i></a>
+          <a href="#" class="text-white mx-2"><i class="ri-facebook-fill" style="color:#1877f2"></i></a>
+          <a href="https://medium.com/minamali" target="_blank" class="text-white mx-2"><i class="ri-medium-fill" style="color:#aaa"></i></a>
+          <a href="https://www.linkedin.com/in/umer-jamshaid/" class="text-white mx-2"><i class="ri-linkedin-fill" style="color:#0a66c2"></i></a>
+          <a href="#" class="text-white mx-2"><i class="ri-youtube-fill" style="color:#ff0000"></i></a>
         </div>
-        <p class="mb-0">
-          © 2024 Company, Inc. All rights reserved By Umer Jamshaid And Yahya
-          Rizwan.
-        </p>
+        <p class="mb-0 small">© 2024 URL Shortener by Umer Jamshaid & Yahya Rizwan.</p>
       </div>
     </footer>
 
-    <!-- jQuery, Bootstrap JS, and AJAX Script -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-    {% comment %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-      $(document).ready(function () {
-        $("#url-form").submit(function (e) {
-          e.preventDefault();
-          const originalUrl = $("#original-url").val();
-          $.ajax({
-            url: "/api/shorten/", // Correct URL
-            method: "POST",
-            contentType: "application/json",
-            data: JSON.stringify({ original_url: originalUrl }),
-            success: function (response) {
-              $("#result").html(`
-                <div class="alert alert-success">
-                  Shortened URL: <a href="${response.short_url}" class="shortened-url" target="_blank">${response.short_url}</a>
-                </div>
-              `);
-            },
-            error: function () {
-              $("#result").html(`
-                <div class="alert alert-danger">
-                  Something went wrong, please try again.
-                </div>
-              `);
-            },
-          });
+      function copyToClipboard(text, btn) {
+        navigator.clipboard.writeText(text).then(function() {
+          const original = btn.innerHTML;
+          btn.innerHTML = '<i class="fa-solid fa-check me-1"></i>Copied!';
+          btn.classList.add('text-success');
+          setTimeout(function() {
+            btn.innerHTML = original;
+            btn.classList.remove('text-success');
+          }, 2000);
+        }).catch(function() {
+          // Fallback for older browsers
+          const el = document.createElement('textarea');
+          el.value = text;
+          document.body.appendChild(el);
+          el.select();
+          document.execCommand('copy');
+          document.body.removeChild(el);
+          btn.innerHTML = '<i class="fa-solid fa-check me-1"></i>Copied!';
+          setTimeout(() => { btn.innerHTML = '<i class="fa-regular fa-copy me-1"></i>Copy'; }, 2000);
         });
-      });
+      }
     </script>
-    {% endcomment %}
   </body>
 </html>
-{% comment %} {% endcomment %}
